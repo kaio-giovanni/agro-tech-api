@@ -1,11 +1,11 @@
 const { Sequelize } = require('sequelize');
 const dbConfig = require('../config/database');
+
 const modelDefiners = [
-	//require('./models/user.model'),
-	//require('./models/instrument.model'),
-	//require('./models/orchestra.model'),
-	// Add more models here...
-	// require('./models/item'),
+	require('../models/moinho'),
+	require('../models/colheita'),
+	require('../models/fazenda'),
+	require('../models/campo'),
 ];
 
 class Connection {
@@ -14,14 +14,15 @@ class Connection {
 
 	static getInstance(){
 		if(Connection.conn === null || Connection.conn === undefined){
-			Connection.conn = new Sequelize(dbConfig);
-			assertDatabaseConnectionOk();
-			initModels(modelDefiners);
+
+			Connection.conn = new Sequelize(dbConfig);       // create DB connection
+			Connection.assertDatabaseConnectionOk(); 		// check DB connection
+			Connection.initModels(modelDefiners); 		   // initializes the models
 		}
 		return Connection.conn;
 	}
 
-	async assertDatabaseConnectionOk() {
+	static async assertDatabaseConnectionOk() {
 		console.log(`Checking database connection...`);
 		try {
 			await Connection.conn.authenticate();
@@ -33,9 +34,9 @@ class Connection {
 		}
 	}
 
-	initModels(modelDefiners){
+	static initModels(modelDefiners){
 		for (const modelDefiner of modelDefiners) {
-			modelDefiner.init(sequelize);
+			modelDefiner.init(Connection.conn);
 		}
 	}
 }
