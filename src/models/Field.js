@@ -1,7 +1,7 @@
 'use strict';
 const { Model, DataTypes } = require('sequelize');
 
-class Campo extends Model {
+class Field extends Model {
   static init(connection){
     super.init({
       cod: DataTypes.STRING,
@@ -10,18 +10,19 @@ class Campo extends Model {
     },
     {
       hooks: {
-        afterCreate: (campo, options) => {
-          console.log("Campo created: " + campo + "\n options: " + options);
+        afterCreate: (field, options) => {
+          console.log("Field created: " + field + "\n options: " + options);
         }
       },
       sequelize: connection,
-      modelName: 'Campo',
+      modelName: 'Field',
+      tableName: 'Field'
     });
   }
 
   static associate(models) {
-    // define association here
+    this.belongsTo(models.Farm);
   }
 }
 
-module.exports = Campo;
+module.exports = Field;
