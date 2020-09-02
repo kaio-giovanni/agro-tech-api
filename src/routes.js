@@ -17,7 +17,11 @@ module.exports = (socketio) => {
     });
 
     routes.get('/', (req, res) => {
-        res.send("Challenge CYAN");
+        res.json({
+            "title": "Challenge cyan API",
+            "author": "Kaio giovanni",
+            "github": "https://github.com/kaio-giovanni/"
+        })
     });
 
     routes.post('/register/mill/', millController.create, (req, res) => {
