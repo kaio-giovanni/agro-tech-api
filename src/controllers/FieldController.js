@@ -14,8 +14,8 @@ class FieldController {
 
         try{
             const field = await Field.create({ cod, latitude, longitude, farm_id });
-
-            return res.status(200).send(field);
+            req.socket = field;
+            next();
         }catch(error){
             return res.status(406).send(error);
         }

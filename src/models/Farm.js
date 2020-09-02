@@ -10,7 +10,7 @@ class Farm extends Model {
     {
       hooks: {
         afterCreate: (farm, options) => {
-          console.log("Farm created: " + farm + "\n options: " + options);
+          console.log("Farm created: " + JSON.stringify(farm));
         }
       },
       sequelize: connection,

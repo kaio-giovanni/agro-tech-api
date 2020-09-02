@@ -9,7 +9,7 @@ class Mill extends Model {
     {
       hooks: {
         afterCreate: (mill, options) => {
-          console.log("Mill created: " + mill + "\n options: " + options);
+          console.log("Mill created: " + JSON.stringify(mill));
         }
       },
       sequelize: connection,

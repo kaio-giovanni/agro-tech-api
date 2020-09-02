@@ -14,7 +14,8 @@ class FarmController {
 
         try {
             const farm = await Farm.create({ cod, name, harvest_id });
-            return res.status(200).send(farm);
+            req.socket = farm;
+            next();
         }catch(error){
             return res.status(406).send(error);
         }

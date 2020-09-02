@@ -11,7 +11,7 @@ class Field extends Model {
     {
       hooks: {
         afterCreate: (field, options) => {
-          console.log("Field created: " + field + "\n options: " + options);
+          console.log("Field created: " + JSON.stringify(field));
         }
       },
       sequelize: connection,
@@ -20,9 +20,7 @@ class Field extends Model {
     });
   }
 
-  static associate(models) {
-    this.belongsTo(models.Farm);
-  }
+  static associate(models) {}
 }
 
 module.exports = Field;

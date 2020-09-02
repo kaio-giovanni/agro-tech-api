@@ -16,8 +16,8 @@ class HarvestController {
 
         try{
             const harvest = await Harvest.create({ cod, dt_start, dt_end, mill_id });
-
-            return res.status(200).send(harvest);
+            req.socket = harvest;
+            next();
         }catch(error){
             return res.status(406).send(error);
         }

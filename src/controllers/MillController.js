@@ -10,8 +10,8 @@ class MillController {
 
         try{
             const mill = await Mill.create({ name });
-
-            return res.status(200).send(mill);
+            req.socket = mill;
+            next();
         }catch(error){
             return res.status(406).send(error);
         }

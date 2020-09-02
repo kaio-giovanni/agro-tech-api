@@ -11,7 +11,7 @@ class Harvest extends Model {
     {
       hooks: {
         afterCreate: (harvest, options) => {
-          console.log("Harvest created: " + harvest + "\n options: " + options);
+          console.log("Harvest created: " + JSON.stringify(harvest));
         }
       },
       sequelize: connection,
