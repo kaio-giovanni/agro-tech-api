@@ -1,4 +1,5 @@
 const Field = require('../models/Field');
+const Farm = require('../models/Farm');
 
 class FieldController {
 
@@ -6,13 +7,17 @@ class FieldController {
         const { cod, latitude, longitude, farm_id } = req.body;
 
         if (!cod)
-            return res.send({ error: "Code was not informed" });
+            return res.status(400).send({ error: "Code was not informed" });
         else if (!latitude || !longitude)
-            return res.send({ error: "Location was not informed" });
+            return res.status(400).send({ error: "Location was not informed" });
         else if (!farm_id)
-            return res.send({ error: "It is necessary to inform the farm (Fazenda)" });
+            return res.status(400).send({ error: "It is necessary to inform the farm (Fazenda)" });
 
         try{
+            const farm = await Farm.findByPk(farm_id);
+            if(!farm)
+                return res.status(401).send({ error: "Farm not found!" })
+
             const field = await Field.create({ cod, latitude, longitude, farm_id });
             req.socket = field;
             next();

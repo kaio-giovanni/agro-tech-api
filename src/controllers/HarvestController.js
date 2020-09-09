@@ -1,4 +1,5 @@
 const Harvest = require('../models/Harvest');
+const Mill = require('../models/Mill');
 
 class HarvestController {
 
@@ -6,15 +7,19 @@ class HarvestController {
         const { cod, dt_start, dt_end, mill_id } = req.body;
 
         if (!cod)
-            return res.send({ error: "Code was not informed" });
+            return res.status(400).send({ error: "Code was not informed" });
         else if (!dt_start)
-            return res.send({ error: "Start date was not informed" });
+            return res.status(400).send({ error: "Start date was not informed" });
         else if(!dt_end)
-            return res.send({ error: "End date was not informed" });
+            return res.status(400).send({ error: "End date was not informed" });
         else if(!mill_id)
-            return res.send({ error: "It is necessary to inform the mill (Moinho)" });
+            return res.status(400).send({ error: "It is necessary to inform the mill (Moinho)" });
 
         try{
+            const mill = await Mill.findByPk(mill_id);
+            if(!mill)
+                return res.status(401).send({ error: "Mill not found!" });
+
             const harvest = await Harvest.create({ cod, dt_start, dt_end, mill_id });
             req.socket = harvest;
             next();
@@ -26,7 +31,6 @@ class HarvestController {
     async get(req, res, next){
         try{
             const harvests = await Harvest.findAll({
-            
                 include: [
                     {
                         association: "farm"

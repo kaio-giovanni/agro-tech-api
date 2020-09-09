@@ -1,4 +1,5 @@
 const Farm = require('../models/Farm');
+const Harvest = require('../models/Harvest');
 
 class FarmController {
 
@@ -6,13 +7,17 @@ class FarmController {
         const { cod, name, harvest_id } = req.body;
 
         if (!cod)
-            return res.send({ error: "Code was not informed" });
+            return res.status(400).send({ error: "Code was not informed" });
         else if (!name)
-            return res.send({ error: "Name was not informed" });
+            return res.status(400).send({ error: "Name was not informed" });
         else if (!harvest_id)
-            return res.send({ error: "It is necessary to inform the harvest (Colheita)" });
+            return res.status(400).send({ error: "It is necessary to inform the harvest (Colheita)" });
 
         try {
+            const harvest = await Harvest.findByPk(harvest_id);
+            if(!harvest)
+                return res.status(401).send({ error: "Harvest not found!" });
+
             const farm = await Farm.create({ cod, name, harvest_id });
             req.socket = farm;
             next();

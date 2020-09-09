@@ -6,7 +6,7 @@ class MillController {
         const name = req.body.name;
 
         if (!name)
-            return res.send({ error: "Name was not informed" });
+            return res.status(400).send({ error: "Name was not informed" });
 
         try{
             const mill = await Mill.create({ name });
