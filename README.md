@@ -1,4 +1,7 @@
 ## Desafio FullStack Cyan-agro
+<p align="center">
+          <img src="public/assets/logo.jpeg" >
+</p>
 
 ## Descrição
 - Criação do servidor (__back-end__) do desafio da cyan-agro.com, descrito [aqui](https://bitbucket.org/modclima/challenge/src/master/) .
