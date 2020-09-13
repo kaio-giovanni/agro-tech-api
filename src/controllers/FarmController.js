@@ -54,6 +54,20 @@ class FarmController {
             return res.status(406).send(error);
         }
     }
+
+    async del(req, res, next){
+        const id = req.params.id;
+        try{
+            const farm = await Farm.findByPk(id);
+            if(!farm)
+                return res.status(401).send({ error: "Farm not found!" });
+
+            await farm.destroy();
+            return res.status(200).send({ message: "success" });
+        }catch(error){
+            return res.status(406).send(error);
+        }
+    }
 }
 
 module.exports = new FarmController();

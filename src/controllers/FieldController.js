@@ -46,6 +46,20 @@ class FieldController {
             return res.status(406).send(error);
         }
     }
+
+    async del(req, res, next){
+        const id = req.params.id;
+        try{
+            const field = await Field.findByPk(id);
+            if(!field)
+                return res.status(401).send({ error: "Field not found!" });
+
+            await field.destroy();
+            return res.status(200).send({ message: "success" });
+        }catch(error){
+            return res.status(406).send(error);
+        }
+    }
 }
 
 module.exports = new FieldController();

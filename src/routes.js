@@ -31,6 +31,7 @@ module.exports = (socketio) => {
     });
     routes.get('/mill/', millController.get);
     routes.get('/mill/:id/', millController.getById);
+    routes.delete('/mill/:id/', millController.del);
 
     routes.post('/register/harvest/', harvestController.create, (req, res) => {
         const harvest = req.socket;
@@ -39,6 +40,7 @@ module.exports = (socketio) => {
     });
     routes.get('/harvest/', harvestController.get);
     routes.get('/harvest/:id/', harvestController.getById);
+    routes.delete('/harvest/:id/', harvestController.del);
 
     routes.post('/register/farm/', farmController.create, (req, res) => {
         const farm = req.socket;
@@ -47,6 +49,7 @@ module.exports = (socketio) => {
     });
     routes.get('/farm/', farmController.get);
     routes.get('/farm/:id/', farmController.getById);
+    routes.delete('/farm/:id/', farmController.del);
 
     routes.post('/register/field/', fieldController.create, (req, res) => {
         const field = req.socket;
@@ -55,6 +58,7 @@ module.exports = (socketio) => {
     });
     routes.get('/field/', fieldController.get);
     routes.get('/field/:id/', fieldController.getById);
+    routes.delete('/field/:id/', fieldController.del);
     
     return routes;
 }

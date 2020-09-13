@@ -45,6 +45,20 @@ class MillController {
             return res.status(406).send(error);
         }
     }
+
+    async del(req, res, next){
+        const id = req.params.id;
+        try{
+            const mill = await Mill.findByPk(id);
+            if(!mill)
+                return res.status(401).send({ error: "Mill not found!" });
+            
+            await mill.destroy();
+            return res.status(200).send({ message: "success" });
+        }catch(error){
+            return res.status(406).send(error);
+        }
+    }
 }
 
 module.exports = new MillController();

@@ -58,6 +58,20 @@ class HarvestController {
             return res.status(406).send(error);
         }
     }
+
+    async del(req, res, next){
+        const id = req.params.id;
+        try{
+            const harvest = await Harvest.findByPk(id);
+            if(!harvest)
+                return res.status(401).send({ error: "Harvest not found!" });
+
+            await harvest.destroy();
+            return res.status(200).send({ message: "success" });
+        }catch(error){
+            return res.status(406).send(error);
+        }
+    }
 }
 
 module.exports = new HarvestController();
