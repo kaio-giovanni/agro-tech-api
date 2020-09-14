@@ -3,8 +3,7 @@ module.exports = {
      Lista de Origins que serão aceitas.
     */
     origin: [
-        "http://localhost:3000",
-        "https://agrotech.herokuapp.com"
+        "https://agro-tech-front.herokuapp.com"
     ],
   
     /* ---- Methods ----

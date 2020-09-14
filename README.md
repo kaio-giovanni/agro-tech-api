@@ -10,7 +10,7 @@
 - [x] Cadastrar Moinhos(Mills), Colheitas(Harvests), Fazendas(Farms) e Campos(Fields)
 - [x] Consultar os dados (Todos, ou por id)
 - [x] Ao inserir um novo Moinho, Colheita, Fazenda ou Campo no banco de dados, deve-se enviar um alerta a todos os usuários e mostrar os dados da respectiva nova entidade utilizando WEB SOCKETS.
-- [x] Publicar o projeto na nuvem -> [link](https://agrotechchallenge.herokuapp.com)
+- [x] Publicar o projeto na nuvem -> [link](https://agro-tech-api.herokuapp.com)
 
 ## Tecnologias utilizadas (__Back-end__)
 - NODE JS, Express JS, Sequelize JS, Postgres, Socket-io
@@ -24,11 +24,9 @@
 
     1.3 `npm i`
 
-    1.4 `npx sequelize-cli db:create`
+    1.4 `npx sequelize-cli db:migrate`
 
-    1.5 `npx sequelize-cli db:migrate`
-
-    1.6 `npm run dev`
+    1.5 `npm run dev`
 
 
 ## Autor
